@@ -5,12 +5,23 @@ import salamanderLogo from "../public/bestSalamanderImage.png";
 export default function Header() {
   return (
     <header>
-      <h1>My App</h1>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/video">Video</Link>
-        <Link href="/csv">CSV</Link>
-      </nav>
+      <div className="header-container">
+        <h1>Salamander Site</h1>
+          <nav>
+            <div className="nav-container">
+              <Link href="/" className="headButton">Home</Link>
+              <Link href="/video" className="headButton">Video</Link>
+              <Link href="/csv" className="headButton">CSV</Link>
+            </div>
+            <Image 
+              className="header-logo"
+              src={salamanderLogo} 
+              width={200}
+              height={150}
+              alt="Logo"
+            />
+          </nav>
+      </div>
     </header>
   );
 }
