@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <Article>
+    <article>
         <>
         <h1>Authors</h1>
 
@@ -36,6 +36,6 @@ export default function Footer() {
             />
         <p></p>
         </>
-    </Article>
+    </article>
   )
 }

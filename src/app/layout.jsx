@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata = {
-  title: "My Next.js App",
+  title: "Salamander Selector",
 };
 
 export default function RootLayout({ children }) {
