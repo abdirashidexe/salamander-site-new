@@ -11,6 +11,8 @@ export default function Header() {
           <Link href="/" className="headButton">Home</Link>
           <Link href="/video" className="headButton">Video</Link>
           <Link href="/csv" className="headButton">CSV</Link>
+          <Link href="/introduction" className="headButton">Introduction</Link>
+
         </div>
         <Image 
           className="header-logo"

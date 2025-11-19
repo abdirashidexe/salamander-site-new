@@ -1,7 +1,7 @@
-export default function MainPage() {
+export default function Processing() {
   return (
     <main>
-      <h2>Main Page Content</h2>
+      <h2>Processing Page</h2>
       <div id="main-boxes">
         <div className="box">
           <h3>Target Color</h3>
