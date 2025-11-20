@@ -41,13 +41,13 @@ export default function AuthorsPage() {
 
         <p>I am an aspiring software developer currently pursuing my Bachelor of Applied Science (BAS) with a strong foundation in Java, HTML, CSS, and JavaScript. With a passion for software development, I’m eager to continue learning and expanding my skill set. I’m excited about the opportunities to apply my knowledge, collaborate with others, and contribute to innovative projects.</p>
 
-        {/* <Image
-              src=""
+        <Image
+              src="/Abdi.jpg"
               alt="Abdi Linkedin Profile Picture"
               className="w-[40px] h-auto block md:hidden"
               width={300}
               height={200}
-        /> */}
+        />
 
         <h2>Abdirashid Ahmed</h2>
 
