@@ -1,9 +1,13 @@
-/* Global styles */
+/* --- Import Poppins --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- Global Styles --- */
 body {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #Baf9ff;
+  background-color: #BAF9FF;
+  color: #000;
   text-align: center;
 }
 
@@ -12,11 +16,12 @@ a {
   color: inherit;
 }
 
-/* Header */
+/* --- Header --- */
 header {
   background-color: #5bc59e;
-  padding: 1rem;
+  padding: 1rem 2rem;
   color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .header-container {
@@ -28,26 +33,20 @@ header {
 
 .nav-container {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .headButton {
-  font-size: 18px;
+  font-size: 16px;
   padding: 0.5rem 1rem;
   background-color: white;
   color: #5bc59e;
-  border-radius: 10px;
-  font-weight: bold;
+  border-radius: 12px;
+  font-weight: 600;
   transition: 0.2s;
-}
-
-.introInput {
-  width: 200px;
-  height: 30px;
-}
-
-.introLabel {
-  font-size: large;
+  border: none;
 }
 
 .headButton:hover {
@@ -58,9 +57,12 @@ header {
 
 .header-logo {
   margin-top: 1rem;
+  border-radius: 12px;
+  max-width: 200px;
+  height: auto;
 }
 
-/* Main content boxes */
+/* --- Main Content Boxes --- */
 #main-boxes {
   display: flex;
   justify-content: center;
@@ -71,13 +73,19 @@ header {
 
 .box {
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  width: 200px;
+  gap: 0.75rem;
+  width: 220px;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.box:hover {
+  transform: translateY(-4px);
 }
 
 .box input,
@@ -86,45 +94,91 @@ header {
   padding: 0.5rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Video page */
+/* --- Video Page Boxes --- */
 #video-boxes {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
   padding: 2rem;
 }
 
 .video-box {
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+  width: 250px;
 }
 
-/* Footer */
+.video-box:hover {
+  transform: translateY(-4px);
+}
+
+/* --- Footer --- */
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #d6d6d6;
+  background-color: #ffffff;
   color: black;
-  text-align: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   gap: 2rem;
-  flex-wrap: wrap;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
 }
 
-/* Make images responsive */
+/* --- Inputs & Buttons Global --- */
+input,
+textarea,
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  background-color: #31D3BD;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #408A6F;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* --- Responsive Images --- */
 img {
   max-width: 100%;
   height: auto;
+  border-radius: 10px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .nav-container {
+    gap: 1rem;
+  }
+
+  #main-boxes,
+  #video-boxes {
+    gap: 1rem;
+  }
+
+  .box,
+  .video-box {
+    width: 90%;
+  }
 }

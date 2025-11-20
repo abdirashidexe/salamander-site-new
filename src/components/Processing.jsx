@@ -10,9 +10,9 @@ export default function Processing() {
         </div>
 
         <div className="box">
-          <h3>Video</h3>
-          <textarea></textarea>
-          <button>Choose Videos</button>
+          <h3>Progress</h3>
+          <progress value={30} max={100}></progress>
+          <button>Get Status</button>
         </div>
 
         <div className="box">

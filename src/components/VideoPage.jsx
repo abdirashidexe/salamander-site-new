@@ -4,7 +4,6 @@ export default function VideoPage() {
   return (
     <div id="video-boxes">
       <div className="video-box">
-        <h2>Video Page Content</h2>
         <Image src="/images/placeholder-box.png" alt="placeholder" width={400} height={200}/>
         <button>Choose Video</button>
       </div>
