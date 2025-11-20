@@ -1,5 +1,5 @@
 import Authors from "@/components/Authors";
 
-export default function Authors() {
+export default function authors() {
   return <Authors />;
 }
