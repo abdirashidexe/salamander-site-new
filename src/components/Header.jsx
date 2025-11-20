@@ -8,7 +8,7 @@ export default function Header() {
       <div className="header-container">
         <h1>Salamander Site</h1>
         <div className="nav-container">
-          <Link href="/" className="headButton">Home</Link>
+          <Link href="/" className="headButton">Processor</Link>
           <Link href="/video" className="headButton">Video</Link>
           <Link href="/csv" className="headButton">CSV</Link>
           <Link href="/introduction" className="headButton">Introduction</Link>
