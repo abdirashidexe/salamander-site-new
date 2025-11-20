@@ -41,6 +41,15 @@ header {
   transition: 0.2s;
 }
 
+.introInput {
+  width: 200px;
+  height: 30px;
+}
+
+.introLabel {
+  font-size: large;
+}
+
 .headButton:hover {
   background-color: #4aa886;
   color: white;
