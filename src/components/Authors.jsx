@@ -2,65 +2,91 @@ import Image from "next/image";
 
 export default function AuthorsPage() {
   return (
-    <article>
-        <>
-        <h1>About the Authors</h1>
+    <article className="authors-container">
+      <h1 className="authors-title">About the Authors</h1>
 
-        <Image
-              src="/Blake.png"
-              alt="Blake Linkedin Profile Picture"
-              className="w-[40px] h-auto block md:hidden"
-              width={300}
-              height={200}
-        />
+      <section className="authors-grid">
+        {/* --- Blake --- */}
+        <AuthorCard
+          name="Blake Hansen"
+          img="/Blake.png"
+          alt="Blake Linkedin Profile Picture"
+          links={[
+            { label: "LinkedIn", url: "https://www.linkedin.com/in/blakehansenprogrammer/" },
+            { label: "Github", url: "https://github.com/HansenBlakestudentgreenriveredu" }
+          ]}
+        >
+          <p>
+            I’m Blake, graduating next month with a BA in Information Technology with a focus on software development. I have a strong technical foundation and five years of sales experience that sharpened my communication and problem-solving skills. I’m seeking an entry-level role where I can combine IT knowledge with business insight—such as business analysis, technical sales, or technical coordination; supporting teams and clients.
+          </p>
+        </AuthorCard>
 
-        <h2>Blake Hansen</h2>
+        {/* --- Shawn --- */}
+        <AuthorCard
+          name="Shawn Nguru"
+          img="/Shawn.jpg"
+          alt="Shawn Linkedin Profile Picture"
+          links={[
+            { label: "LinkedIn", url: "https://www.linkedin.com/in/shawn-nguru-215412346/" }
+          ]}
+        >
+          <p>
+            I am an aspiring software developer currently pursuing my Bachelor of Applied Science (BAS)
+            with a strong foundation in Java, HTML, CSS, and JavaScript. With a passion for software development,
+            I’m eager to continue learning and expanding my skill set. I’m excited about the opportunities to apply
+            my knowledge, collaborate with others, and contribute to innovative projects.
+          </p>
+        </AuthorCard>
 
-        <h3>
-        <a href="https://www.linkedin.com/in/blakehansenprogrammer/">LinkedIn</a>
-        <a href="https://github.com/HansenBlakestudentgreenriveredu">  Github</a>
-        </h3>
+        {/* --- Abdi --- */}
+        <AuthorCard
+          name="Abdirashid Ahmed"
+          img="/Abdi.jpg"
+          alt="Abdi Linkedin Profile Picture"
+          links={[
+            { label: "LinkedIn", url: "https://www.linkedin.com/in/abdirashid1/" },
+            { label: "Github", url: "https://github.com/abdirashidexe" }
+          ]}
+        >
+          <p>
+            I’m a Muslim aspiring Full Stack Developer with a passion for building clean, functional interfaces
+            with the goal of helping serve society in a meaningful way. I’ve been learning independently and building
+            real projects using JavaScript, Java, and Git.
+          </p>
 
-        <p>I’m Blake, a software engineering student at Green River College working toward my Bachelor’s in IT with a focus on software development. I’m passionate about front-end programming, and I love designing clean, responsive websites using HTML, CSS, and Bootstrap. One of my favorite projects is a five-page website inspired by Tesla’s product lineup, complete with media queries to ensure a seamless experience across devices.</p>
-
-        <p>In addition to my technical skills, I bring 5 years of professional sales experience, which has sharpened my communication, client-focused mindset, and ability to understand and solve real-world problems. I’m currently seeking an internship or entry-level opportunity in front-end development, sales engineering, or data analysis; ideally roles where I can bridge my background in sales with my passion for technology. I’m open to both in-person and remote positions.</p>
-
-        <Image
-              src="/Shawn.jpg"
-              alt="Shawn Linkedin Profile Picture"
-              className="w-[40px] h-auto block md:hidden"
-              width={300}
-              height={200}
-        />
-
-        <h2>Shawn Nguru</h2>
-
-        <h3>
-        <a href="https://www.linkedin.com/in/shawn-nguru-215412346/">LinkedIn</a>
-        </h3>
-
-        <p>I am an aspiring software developer currently pursuing my Bachelor of Applied Science (BAS) with a strong foundation in Java, HTML, CSS, and JavaScript. With a passion for software development, I’m eager to continue learning and expanding my skill set. I’m excited about the opportunities to apply my knowledge, collaborate with others, and contribute to innovative projects.</p>
-
-        <Image
-              src="/Abdi.jpg"
-              alt="Abdi Linkedin Profile Picture"
-              className="w-[40px] h-auto block md:hidden"
-              width={300}
-              height={200}
-        />
-
-        <h2>Abdirashid Ahmed</h2>
-
-        <h3>
-        <a href="https://www.linkedin.com/in/abdirashid1/">LinkedIn</a>
-        <a href="https://github.com/abdirashidexe">  Github</a>
-        </h3>
-
-        <p>I'm a Muslim aspiring Full Stack Developer with a passion for building clean, functional interfaces with the goal of helping serve society in a meaningful way. I’ve been learning independently and building real projects using JavaScript, Java, and Git.
-
-        My GitHub highlights this journey, and I’m looking for internships and junior roles where I can grow, contribute, and keep learning in a team environment.</p>
-
-        </>
+          <p>
+            My GitHub highlights this journey, and I’m looking for internships and junior roles where I can grow,
+            contribute, and keep learning in a team environment.
+          </p>
+        </AuthorCard>
+      </section>
     </article>
-  )
+  );
+}
+
+/* --- Reusable Author Card Component --- */
+function AuthorCard({ name, img, alt, links, children }) {
+  return (
+    <div className="author-card">
+      <Image
+        src={img}
+        alt={alt}
+        width={250}
+        height={250}
+        className="author-img"
+      />
+
+      <h2 className="author-name">{name}</h2>
+
+      <div className="author-links">
+        {links.map((link, index) => (
+          <a key={index} href={link.url} target="_blank">
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <div className="author-description">{children}</div>
+    </div>
+  );
 }
