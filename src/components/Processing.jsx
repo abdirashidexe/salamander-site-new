@@ -10,7 +10,7 @@ export default function Processing() {
         </div>
 
         <div className="box">
-          <h3>Progress</h3>
+          <h3>Process</h3>
           <progress value={30} max={100}></progress>
           <button>Get Status</button>
         </div>
