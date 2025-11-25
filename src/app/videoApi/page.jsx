@@ -1,6 +1,6 @@
 // app/video/page.jsx
-import videoApi from "@/components/VideosApi";
+import VideosApi from "@/components/VideosApi";
 
-export default function VideoAPi() {
-  return <videoApi />;
+export default function VideoPage() {
+  return <VideosApi />;
 }
