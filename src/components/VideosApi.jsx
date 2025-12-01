@@ -8,15 +8,17 @@ export default function VideosApi() {
     fetch("http://localhost:3000/api/videos")
         .then(res => res.json())
         .then(data => {
-            setVideos(data)          
+            setVideos(data.videos)          
         }, [])
         
         console.log("Fetching WORKED!")
     return (
         <div>
-            <ul>
-                <li>{JSON.stringify(videos)}</li>
-            </ul>
-        </div>
+          {videos.map(file => (
+            <p key={file}>
+              {file}
+            </p>
+          ))}
+      </div>
     )
 }
