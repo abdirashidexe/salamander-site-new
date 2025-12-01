@@ -4,7 +4,7 @@ import React from "react"
 
 export default function VideosApi() {
 
-    const [videos, setVideos] = React.useState(null)
+    const [videos, setVideos] = React.useState([])
     fetch("http://localhost:3000/api/videos")
         .then(res => res.json())
         .then(data => {
@@ -20,5 +20,6 @@ export default function VideosApi() {
             </p>
           ))}
       </div>
-    )
+    );
+
 }
