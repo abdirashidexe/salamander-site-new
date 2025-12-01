@@ -9,12 +9,14 @@ export default function VideosApi() {
         .then(res => res.json())
         .then(data => {
             setVideos(data)          
-        })
+        }, [])
         
         console.log("Fetching WORKED!")
     return (
         <div>
-            <p>{JSON.stringify(videos)}</p>
+            <ul>
+                <li>{JSON.stringify(videos)}</li>
+            </ul>
         </div>
     )
 }
