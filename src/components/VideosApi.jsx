@@ -1,6 +1,9 @@
 "use client"
 
 import React from "react"
+import Link from "next/link";
+import Image from "next/image";
+import salamanderLogo from "../public/bestSalamanderImage.png";
 
 export default function VideosApi() {
 
@@ -13,13 +16,17 @@ export default function VideosApi() {
         
         console.log("Fetching WORKED!")
     return (
-        <div>
+      <>
+        <div id="video-boxes">
           {videos.map(file => (
-            <p key={file}>
-              {file}
-            </p>
+            <div key={file} className="video-box">
+              <Image src="/images/placeholder-box.png" alt="placeholder" width={400} height={200}/>
+              <p>{file}</p>
+              <button>Choose Video</button>
+            </div>
           ))}
       </div>
+        </>
     );
 
 }
