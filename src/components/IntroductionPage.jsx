@@ -16,10 +16,12 @@ export default function Introduction() {
               placeholder="example.mp4"
             />
           </label>
+          <Link href="/video" className="headButton">Enter</Link>
         </form>
-
-        <h3>Existing video: </h3>
-        <Link href="/video" className="headButton">Video</Link>
+        <br></br><br></br>
+        <h3>Existing Video</h3>
+        <Link href="/video" className="headButton">Click here</Link>
+        <br></br>
         <br></br><br></br>
       </main>
     );

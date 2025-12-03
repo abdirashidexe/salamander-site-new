@@ -27,7 +27,8 @@ export default function AuthorsPage() {
           img="/Shawn.jpg"
           alt="Shawn Linkedin Profile Picture"
           links={[
-            { label: "LinkedIn", url: "https://www.linkedin.com/in/shawn-nguru-215412346/" }
+            { label: "LinkedIn", url: "https://www.linkedin.com/in/shawn-nguru-215412346/" },
+            { label: "Github", url: "https://github.com/ShawnN003/" }
           ]}
         >
           <p>
