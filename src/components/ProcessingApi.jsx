@@ -1,8 +1,11 @@
 "use client";
-
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function VideosApi() {
+
+    const params = useSearchParams();
+    const video = params.get("video");
 
   const [color, setColor] = React.useState("#000000");
   const [threshold, setThreshold] = React.useState("");
@@ -18,6 +21,7 @@ export default function VideosApi() {
   return (
     <main>
       <h2>Processing API Page</h2>
+      <h2>Processing: {video}</h2>
 
       <div id="main-boxes">
         

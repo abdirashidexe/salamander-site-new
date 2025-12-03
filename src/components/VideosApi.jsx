@@ -27,11 +27,13 @@ export default function VideosApi() {
           const thumbnailUrl = `http://localhost:3000/api/thumbnail/${file}`;
           
           return (
-            <div key={file} className="video-box">
-              <Image src={thumbnailUrl} alt={`Image of ${file}`} width={400} height={200} unoptimized={true} />
-              <p>{file}</p>
-              <button>Choose Video</button>
-            </div>
+            <form key={file} action="/processingApi" method="GET" className="video-box">
+              <div key={file} className="video-box">
+                <Image src={thumbnailUrl} alt={`Image of ${file}`} width={400} height={200} unoptimized={true} />
+                <p>{file}</p>
+                <button type="submit" name="video" value={file} >Choose Video</button>
+              </div>
+            </form>
           );
         })}
       </div>
