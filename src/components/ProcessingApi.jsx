@@ -19,19 +19,12 @@ export default function VideosApi() {
   }
 
   function handleProcessing(){
-
-    const [id, setJobid] = React.useState([])
-
-
-    fetch(`http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`)
+    fetch(`http://localhost:3000/api/process/${video}?targetColor=1863bd&threshold=${threshold}`, {
+        method: "POST",
+      })
     .then((res) => res.json())
-    .then((data) => {
-      setJobid(data);
-    })
     .catch(err => console.error("Error fetching videos:", err));
-
-    console.log("Fetching WORKED! " + data)
-
+    console.log(`Fetching WORKED! Video: ${video}  Color: ${color} Video file: ${video}`)
 
   }
 
