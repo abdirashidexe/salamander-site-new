@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function VideosApi() {
+    const [jobid, setJobid] = React.useState(null);
 
     const params = useSearchParams();
     const video = params.get("video");
@@ -18,19 +19,23 @@ export default function VideosApi() {
     console.log("Threshold:", threshold);
   }
 
-  function handleProcessing(){
+  function handleProcessing() {
     const processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
-    const trueUrl = processUrl.replace(/[#]/g, "")
-    fetch(trueUrl, {
-        method: "POST",
+    const trueUrl = processUrl.replace(/[#]/g, "");
+  
+    fetch(trueUrl, { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => {
+        setJobid(data.jobId);
+        console.log(data.jobId)
       })
-    .then((res) => res.json())
-    .catch(err => console.error("Error fetching videos:", err));
-    console.log(`Fetching WORKED! Video: ${video}  Color: ${color} Video file: ${video}`)
+      .catch(err => console.error("Error:", err));
+  
+    console.log(`Processing: ${video}, color: ${color}, threshold: ${threshold}, jobid: ${jobid}`);
   }
-
   return (
     <main>
+        
       <h2>Processing API Page</h2>
       <h2>Processing: {video}</h2>
 
