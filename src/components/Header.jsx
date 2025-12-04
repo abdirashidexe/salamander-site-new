@@ -12,7 +12,7 @@ export default function Header() {
           <Link href="/video" className="headButton">Video</Link>
           <Link href="/csv" className="headButton">CSV</Link>
           <Link href="/introduction" className="headButton">Introduction</Link>
-
+          <Link href="/authors" className="headButton">Authors</Link>
         </div>
         <Image 
           className="header-logo"

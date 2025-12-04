@@ -16,7 +16,7 @@ export default function Introduction() {
               placeholder="example.mp4"
             />
           </label>
-          <Link href="/video" className="headButton">Enter</Link>
+          <Link href="/video" className="headButton">Submit</Link>
         </form>
         <br></br><br></br>
         <h3>Existing Video</h3>
