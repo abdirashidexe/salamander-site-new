@@ -18,6 +18,23 @@ export default function VideosApi() {
     console.log("Threshold:", threshold);
   }
 
+  function handleProcessing(){
+
+    const [id, setJobid] = React.useState([])
+
+
+    fetch(`http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setJobid(data);
+    })
+    .catch(err => console.error("Error fetching videos:", err));
+
+    console.log("Fetching WORKED! " + data)
+
+
+  }
+
   return (
     <main>
       <h2>Processing API Page</h2>
@@ -34,6 +51,12 @@ export default function VideosApi() {
             onChange={(e) => setColor(e.target.value)}
           />
           <button onClick={handleColorClick}>Set Color</button>
+        </div>
+
+        <div className="box">
+          <h3>Process</h3>
+          <progress value={30} max={100}></progress>
+          <button onClick={handleProcessing}>Get Status</button>
         </div>
 
         {/* THRESHOLD BOX */}
