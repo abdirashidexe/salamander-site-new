@@ -19,7 +19,9 @@ export default function VideosApi() {
   }
 
   function handleProcessing(){
-    fetch(`http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`, {
+    const processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
+    const trueUrl = processUrl.replace(/[#]/g, "")
+    fetch(trueUrl, {
         method: "POST",
       })
     .then((res) => res.json())
@@ -40,7 +42,7 @@ export default function VideosApi() {
           <input 
             type="color" 
             value={color}
-            onChange={(e) => setColor(e.target.value.replace(/[#]/g, ""))}
+            onChange={(e) => setColor(e.target.value)}
           />
           <button onClick={handleColorClick}>Set Color</button>
         </div>
