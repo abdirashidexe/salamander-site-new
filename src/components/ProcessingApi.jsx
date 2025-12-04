@@ -19,13 +19,12 @@ export default function VideosApi() {
   }
 
   function handleProcessing(){
-    fetch(`http://localhost:3000/api/process/${video}?targetColor=1863bd&threshold=${threshold}`, {
+    fetch(`http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`, {
         method: "POST",
       })
     .then((res) => res.json())
     .catch(err => console.error("Error fetching videos:", err));
     console.log(`Fetching WORKED! Video: ${video}  Color: ${color} Video file: ${video}`)
-
   }
 
   return (
@@ -41,7 +40,7 @@ export default function VideosApi() {
           <input 
             type="color" 
             value={color}
-            onChange={(e) => setColor(e.target.value)}
+            onChange={(e) => setColor(e.target.value.replace(/[#]/g, ""))}
           />
           <button onClick={handleColorClick}>Set Color</button>
         </div>
