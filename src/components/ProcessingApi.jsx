@@ -3,7 +3,6 @@ import { useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function VideosApi() {
-    const [jobid, setJobid] = React.useState(null);
 
     const params = useSearchParams();
     const video = params.get("video");
@@ -26,20 +25,16 @@ export default function VideosApi() {
     fetch(trueUrl, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
-        setJobid(data.jobId);
-        console.log(data.jobId)
+        console.log("Job ID:", data.jobId);
+            return fetch(`http://localhost:3000/api/process/${data.jobId}/status`);
       })
-      .catch(err => console.error("Error:", err));
-  
-    console.log(`Processing: ${video}, color: ${color}, threshold: ${threshold}, jobid: ${jobid}`);
+      .then((res) => res.json())
+      .then((status) => {
+        console.log("Status:", status);
+      })
+      .catch((err) => console.error("Error:", err));
   }
 
-  React.useEffect(() => {
-    if (jobid) {
-        console.log("Job ID ready for use:", jobid);
-        // You can call another API to poll job status here
-    }
-}, [jobid]);
 
   return (
     <main>
