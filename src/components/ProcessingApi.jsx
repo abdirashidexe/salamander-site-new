@@ -33,6 +33,14 @@ export default function VideosApi() {
   
     console.log(`Processing: ${video}, color: ${color}, threshold: ${threshold}, jobid: ${jobid}`);
   }
+
+  React.useEffect(() => {
+    if (jobid) {
+        console.log("Job ID ready for use:", jobid);
+        // You can call another API to poll job status here
+    }
+}, [jobid]);
+
   return (
     <main>
         
