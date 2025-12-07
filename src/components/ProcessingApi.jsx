@@ -4,41 +4,50 @@ import React from "react";
 
 export default function VideosApi() {
 
+    //Getting video picked from the user
     const params = useSearchParams();
     const video = params.get("video");
 
+    //react state for color and threshold 
   const [color, setColor] = React.useState("#000000");
   const [threshold, setThreshold] = React.useState(50); 
 
-  const handleChange = (prop) => {
-    setThreshold(prop.target.value);
+  //targeting the html element and running this function to keep track of changes of the threshold
+  const handleChange = (event) => {
+    setThreshold(event.target.value);
   };
 
+  //testing if it outputs correct values
   function handleColorClick() {
     console.log("Selected color:", color);
   }
 
+    //testing if it outputs correct values
   function handleThresholdClick() {
     console.log("Threshold:", threshold);
   }
 
   function handleProcessing() {
+    //putting the url inside a variable to take out the # because react hates those 
     const processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
     const trueUrl = processUrl.replace(/[#]/g, "");
   
+    //Posting to get the jobId for the user
     fetch(trueUrl, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         console.log("Job ID:", data.jobId);
+
+            //Using the jobId to get the status of the data
             return fetch(`http://localhost:3000/api/process/${data.jobId}/status`);
+
       })
       .then((res) => res.json())
       .then((status) => {
-        console.log("Status:", status);
+        console.log("Status:", status);    
       })
       .catch((err) => console.error("Error:", err));
   }
-
 
   return (
     <main>
