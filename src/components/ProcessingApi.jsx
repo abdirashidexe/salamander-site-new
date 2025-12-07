@@ -11,6 +11,8 @@ export default function VideosApi() {
     //react state for color and threshold 
   const [color, setColor] = React.useState("#000000");
   const [threshold, setThreshold] = React.useState(50); 
+  const [status, setStatus] = React.useState();
+
 
   //targeting the html element and running this function to keep track of changes of the threshold
   const handleChange = (event) => {
@@ -38,30 +40,38 @@ export default function VideosApi() {
 
     console.log("Job ID:", data.jobId);
 
-    // 2 — Begin polling for job status
+    // Calling the status function to get the csv
     statusProcessing(data.jobId);
     
   }
 
   async function statusProcessing(jobId) {
-    const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
-    const data = await res.json();
+    while(true)
+    {
+        const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
+        const data = await res.json();
 
-    console.log("Status:", data);
+        console.log("Status:", data);
 
-    if (data.status === "done") {
-        console.log("Processing complete:", data.result);
+        if (data.status === "done") {
+            console.log("Processing complete:", data.result);
+            setStatus(data.result);
+            break;
+        }
+        if (data.status === "error") {
+            console.error("Error:", data.error);
+            break;
+        }
+    }
   }
 
-  if (data.status === "error") {
-    console.error("Error:", data.error);
-  }
-  }
   return (
     <main>
-        
+
       <h2>Processing API Page</h2>
       <h2>Processing: {video}</h2>
+      <h3>output testing: {status}</h3>
+
 
       <div id="main-boxes">
         
