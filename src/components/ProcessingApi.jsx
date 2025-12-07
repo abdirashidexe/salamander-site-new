@@ -1,6 +1,8 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import React from "react";
+import Link from "next/link";
+
 
 export default function VideosApi() {
 
@@ -30,25 +32,28 @@ export default function VideosApi() {
   }
 
   async function handleProcessing() {
+
     //putting the url inside a variable to take out the # because react hates those 
     const  processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
     const trueUrl = processUrl.replace(/[#]/g, "");
   
-    //Posting to get the jobId for the user
+    //Posting a fetch for the jobId for the user that waits for the server
     const res = await fetch(trueUrl, { method: "POST" });
     const data = await res.json();
 
-    console.log("Job ID:", data.jobId);
+    //jobId exists?
+    console.log("Job ID:", data.jobId);   
 
     // Calling the status function to get the csv
     statusProcessing(data.jobId);
-    
   }
 
   async function statusProcessing(jobId) {
-    while(true)
+    //infinite loop that will constantly be checking what the status of the data is 
+    while(true)   
     {
-        const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
+      //a fetch that waits for the server 
+        const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)    
         const data = await res.json();
 
         console.log("Status:", data);
@@ -56,11 +61,11 @@ export default function VideosApi() {
         if (data.status === "done") {
             console.log("Processing complete:", data.result);
             setStatus(data.result);
-            break;
+            break;    //getting out of the loop when it's finished 
         }
         if (data.status === "error") {
             console.error("Error:", data.error);
-            break;
+            break;    //getting out of the loop when it breaks 
         }
     }
   }
@@ -68,10 +73,12 @@ export default function VideosApi() {
   return (
     <main>
 
-      <h2>Processing API Page</h2>
-      <h2>Processing: {video}</h2>
-      <h3>output testing: {status}</h3>
+        {video 
+        ? <h2>Processing: {video}</h2> 
+        : <h2>Please enter a video first: <Link href="/video" className="headButton">Click here</Link></h2>
+        }
 
+        {<h2>Data: {status}</h2>}
 
       <div id="main-boxes">
         
@@ -88,7 +95,6 @@ export default function VideosApi() {
 
         <div className="box">
           <h3>Process</h3>
-          <progress value={30} max={100}></progress>
           <button onClick={handleProcessing}>Get Status</button>
         </div>
 
