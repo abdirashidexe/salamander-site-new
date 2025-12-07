@@ -27,35 +27,36 @@ export default function VideosApi() {
     console.log("Threshold:", threshold);
   }
 
-  function handleProcessing() {
+  async function handleProcessing() {
     //putting the url inside a variable to take out the # because react hates those 
-    const processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
+    const  processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
     const trueUrl = processUrl.replace(/[#]/g, "");
   
     //Posting to get the jobId for the user
-    fetch(trueUrl, { method: "POST" })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Job ID:", data.jobId);
+    const res = await fetch(trueUrl, { method: "POST" });
+    const data = await res.json();
 
-            //Using the jobId to get the status of the data
-            statusProcessing(data.jobId);
+    console.log("Job ID:", data.jobId);
 
-      })
-      .then((res) => res.json())
-      .then((status) => {
-        console.log("Status:", status);    
-      })
-      .catch((err) => console.error("Error:", err));
+    // 2 — Begin polling for job status
+    statusProcessing(data.jobId);
+    
   }
 
   async function statusProcessing(jobId) {
     const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
     const data = await res.json();
 
-    console.log("Polled status:", data);
+    console.log("Status:", data);
+
+    if (data.status === "done") {
+        console.log("Processing complete:", data.result);
   }
 
+  if (data.status === "error") {
+    console.error("Error:", data.error);
+  }
+  }
   return (
     <main>
         
