@@ -8,7 +8,11 @@ export default function VideosApi() {
     const video = params.get("video");
 
   const [color, setColor] = React.useState("#000000");
-  const [threshold, setThreshold] = React.useState("");
+  const [threshold, setThreshold] = React.useState(50); 
+
+  const handleChange = (prop) => {
+    setThreshold(prop.target.value);
+  };
 
   function handleColorClick() {
     console.log("Selected color:", color);
@@ -63,13 +67,14 @@ export default function VideosApi() {
 
         {/* THRESHOLD BOX */}
         <div className="box">
-          <h3>Threshold</h3>
-          <input 
-            type="number"
+          <h3>Threshold {threshold}</h3>
+          <input type="range"
+            min="0"
+            max="100"
             value={threshold}
-            onChange={(e) => setThreshold(e.target.value)}
+            onChange={handleChange}
           />
-          <button onClick={handleThresholdClick}>Set Threshold</button>
+          <button>Set Threshold</button>
         </div>
       </div>
     </main>

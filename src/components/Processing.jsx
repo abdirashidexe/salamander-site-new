@@ -1,4 +1,14 @@
+"use client";
+
+import { useState } from 'react';
+
 export default function Processing() {
+  const [numVal, setNumVal] = useState(50); // Initial value
+
+  const handleChange = (prop) => {
+    setNumVal(prop.target.value);
+  };
+
   return (
     <main>
       <h2>Processing Page</h2>
@@ -16,8 +26,13 @@ export default function Processing() {
         </div>
 
         <div className="box">
-          <h3>Threshold</h3>
-          <input type="number"/>
+          <h3>Threshold {numVal}</h3>
+          <input type="range"
+            min="0"
+            max="100"
+            value={numVal}
+            onChange={handleChange}
+          />
           <button>Set Threshold</button>
         </div>
       </div>
