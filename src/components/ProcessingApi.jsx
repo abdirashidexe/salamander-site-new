@@ -74,7 +74,7 @@ export default function VideosApi() {
             value={threshold}
             onChange={handleChange}
           />
-          <button>Set Threshold</button>
+          <button onClick={handleThresholdClick}>Set Threshold</button>
         </div>
       </div>
     </main>
