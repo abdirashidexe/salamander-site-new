@@ -39,7 +39,7 @@ export default function VideosApi() {
         console.log("Job ID:", data.jobId);
 
             //Using the jobId to get the status of the data
-            return fetch(`http://localhost:3000/api/process/${data.jobId}/status`);
+            statusProcessing(data.jobId);
 
       })
       .then((res) => res.json())
@@ -47,6 +47,13 @@ export default function VideosApi() {
         console.log("Status:", status);    
       })
       .catch((err) => console.error("Error:", err));
+  }
+
+  async function statusProcessing(jobId) {
+    const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
+    const data = await res.json();
+
+    console.log("Polled status:", data);
   }
 
   return (
