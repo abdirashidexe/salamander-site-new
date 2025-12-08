@@ -72,6 +72,8 @@ export default function VideosApi() {
             console.error("Error:", data.error);
             break;    //getting out of the loop when it breaks 
         }
+        // Having the frontend wait 10 seconds before making another request 
+        await new Promise(resolve => setTimeout(resolve, 10000));
     }
   }
 
