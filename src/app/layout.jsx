@@ -1,4 +1,3 @@
-// app/layout.jsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -12,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header />
-        {children}
+        <main>{children}</main> 
         <Footer />
       </body>
     </html>
