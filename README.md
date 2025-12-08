@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Description:
 
-## Getting Started
+This project allows the user to insert a video and a target color (for the moving object). The processor extracts the centroids locations from video frames. This writes -per-frame- CSV summaries for the user that shows the time and coordinates of the targeted moving object.
 
-First, run the development server:
+# How to Use The App:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Click the button that leads you to the videos page to select an existing video.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Choose the color of the object you're looking to track.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Choose a number for the threshold*.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Click the button to process the video.
 
-## Learn More
+5. Once processed, a download link of your CSV should appear.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*threshold: How similar does a pixel’s color have to be to the color you chose for it to count as part of the object?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Example:
+- You click a green pixel on the salamander.
+- The threshold = 30.
+- Every pixel in the video whose color is within 30 units of that green will be counted as part of your selection.
+- Pixels farther away than 30 are ignored.
