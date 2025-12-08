@@ -2,6 +2,8 @@
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image"
+import loading from "./../../public/loading.gif"
 
 
 export default function VideosApi() {
@@ -14,6 +16,7 @@ export default function VideosApi() {
   const [color, setColor] = React.useState("#000000");
   const [threshold, setThreshold] = React.useState(50); 
   const [status, setStatus] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(false)
 
 
   //targeting the html element and running this function to keep track of changes of the threshold
@@ -32,6 +35,8 @@ export default function VideosApi() {
   }
 
   async function handleProcessing() {
+
+    setIsLoading(true);
 
     //putting the url inside a variable to take out the # because react hates those 
     const  processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
@@ -70,6 +75,7 @@ export default function VideosApi() {
 
         if (data.status === "error") {
             console.error("Error:", data.error);
+            setIsLoading(false);
             break;    //getting out of the loop when it breaks 
         }
         // Having the frontend wait 10 seconds before making another request 
@@ -85,7 +91,13 @@ export default function VideosApi() {
         : <h2>Please enter a video first: <Link href="/video" className="headButton">Click here</Link></h2>
         }
 
-        {<h2>Data: {status}</h2>}
+        {/* {<h2>Data: {status}</h2>} */}
+                {isLoading && (<Image 
+                    src={loading} 
+                    width={100}
+                    height={75}
+                    alt="Loading gif"
+                />)}
 
       <div id="main-boxes">
         
