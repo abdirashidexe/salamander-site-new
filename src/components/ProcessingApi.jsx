@@ -59,10 +59,15 @@ export default function VideosApi() {
         console.log("Status:", data);
 
         if (data.status === "done") {
-            console.log("Processing complete:", data.result);
-            setStatus(data.result);
-            break;    //getting out of the loop when it's finished 
-        }
+        console.log("Processing complete:", data.result);
+        setStatus(data.result);
+
+        // Redirect user to CSV page with query param
+        window.location.href = `/csv?file=${encodeURIComponent(data.result)}`;
+
+        break;
+    }
+
         if (data.status === "error") {
             console.error("Error:", data.error);
             break;    //getting out of the loop when it breaks 

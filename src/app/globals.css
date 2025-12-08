@@ -268,6 +268,37 @@ img {
   padding: 1rem;
 }
 
+/* --- CSV Page Styles --- */
+.csv-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.csv-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.csv-download-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #31D3BD; /* Use the same button color you already have */
+  color: black;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.csv-download-btn:hover {
+  background-color: #408A6F;
+  color: white;
+  transform: translateY(-2px);
+}
+
+
 /* Mobile: 1 column */
 @media (max-width: 768px) {
   .authors-grid {
