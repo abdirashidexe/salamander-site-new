@@ -22,13 +22,13 @@ export default function CsvFilePage() {
 
   return (
     <div className="csv-container">
-      <h2 className="csv-title">CSV Download</h2>
+      <h2 className="csv-title">⬇️ Your CSV is ready to download! ⬇️</h2>
       <a
         href={csvUrl}
         download
         className="csv-download-btn"
       >
-        Download CSV
+        Download
       </a>
     </div>
   );

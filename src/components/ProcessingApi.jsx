@@ -4,17 +4,18 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image"
 import loading from "./../../public/loading.gif"
+import placeholderImg from "./../../public/placeholder-box.png"
 
 
 export default function VideosApi() {
 
-    //Getting video picked from the user
-    const params = useSearchParams();
-    const video = params.get("video");
+  //Getting video picked from the user
+  const params = useSearchParams();
+  const video = params.get("video");
 
-    //react state for color and threshold 
+  //react state for color and threshold 
   const [color, setColor] = React.useState("#000000");
-  const [threshold, setThreshold] = React.useState(50); 
+  const [threshold, setThreshold] = React.useState(50);
   const [status, setStatus] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -29,7 +30,7 @@ export default function VideosApi() {
     console.log("Selected color:", color);
   }
 
-    //testing if it outputs correct values
+  //testing if it outputs correct values
   function handleThresholdClick() {
     console.log("Threshold:", threshold);
   }
@@ -39,15 +40,15 @@ export default function VideosApi() {
     setIsLoading(true);
 
     //putting the url inside a variable to take out the # because react hates those 
-    const  processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
+    const processUrl = `http://localhost:3000/api/process/${video}?targetColor=${color}&threshold=${threshold}`;
     const trueUrl = processUrl.replace(/[#]/g, "");
-  
+
     //Posting a fetch for the jobId for the user that waits for the server
     const res = await fetch(trueUrl, { method: "POST" });
     const data = await res.json();
 
     //jobId exists?
-    console.log("Job ID:", data.jobId);   
+    console.log("Job ID:", data.jobId);
 
     // Calling the status function to get the csv
     statusProcessing(data.jobId);
@@ -55,15 +56,14 @@ export default function VideosApi() {
 
   async function statusProcessing(jobId) {
     //infinite loop that will constantly be checking what the status of the data is 
-    while(true)   
-    {
+    while (true) {
       //a fetch that waits for the server 
-        const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)    
-        const data = await res.json();
+      const res = await fetch(`http://localhost:3000/api/process/${jobId}/status`)
+      const data = await res.json();
 
-        console.log("Status:", data);
+      console.log("Status:", data);
 
-        if (data.status === "done") {
+      if (data.status === "done") {
         console.log("Processing complete:", data.result);
         setStatus(data.result);
 
@@ -71,50 +71,47 @@ export default function VideosApi() {
         window.location.href = `/csv?file=${encodeURIComponent(data.result)}`;
 
         break;
-    }
+      }
 
-        if (data.status === "error") {
-            console.error("Error:", data.error);
-            setIsLoading(false);
-            break;    //getting out of the loop when it breaks 
-        }
-        // Having the frontend wait 10 seconds before making another request 
-        await new Promise(resolve => setTimeout(resolve, 10000));
+      if (data.status === "error") {
+        console.error("Error:", data.error);
+        setIsLoading(false);
+        break;    //getting out of the loop when it breaks 
+      }
+      // Having the frontend wait 10 seconds before making another request 
+      await new Promise(resolve => setTimeout(resolve, 10000));
     }
   }
+
+  const thumbnailUrl = `http://localhost:3000/api/thumbnail/${video}`;
 
   return (
     <main>
 
-        {video 
-        ? <h2>Processing: {video}</h2> 
+      {video
+        ? <h2>Selected: {video}</h2>
         : <h2>Please enter a video first: <Link href="/video" className="headButton">Click here</Link></h2>
-        }
+      }
 
-        {/* {<h2>Data: {status}</h2>} */}
-                {isLoading && (<Image 
-                    src={loading} 
-                    width={100}
-                    height={75}
-                    alt="Loading gif"
-                />)}
+      {/* {<h2>Data: {status}</h2>} */}
+      {isLoading && (<Image
+        src={loading}
+        width={100}
+        height={75}
+        alt="Loading gif"
+      />)}
 
-      <div id="main-boxes">
-        
+      {/* <div id="main-boxes"> */}
+      <div id="settings-part-div">
         {/* COLOR BOX */}
         <div className="box">
           <h3>Target Color</h3>
-          <input 
-            type="color" 
+          <input
+            type="color"
             value={color}
             onChange={(e) => setColor(e.target.value)}
           />
           <button onClick={handleColorClick}>Set Color</button>
-        </div>
-
-        <div className="box">
-          <h3>Process</h3>
-          <button onClick={handleProcessing}>Get Status</button>
         </div>
 
         {/* THRESHOLD BOX */}
@@ -129,6 +126,24 @@ export default function VideosApi() {
           <button onClick={handleThresholdClick}>Set Threshold</button>
         </div>
       </div>
+
+      <div id="binarizer-part-div">
+        <div className="video-box">
+          <Image src={thumbnailUrl} alt={video ? `Image of ${video}` : `Thumbnail unavailable: No video was selected.`} width={400} height={200} unoptimized={true} />
+          <p>Original</p>
+        </div>
+
+        <div className="video-box">
+          <Image src={placeholderImg} alt={`Image of Binarized Version`} width={400} height={200} unoptimized={true} />
+          <p>Binarized</p>
+        </div>
+      </div>
+
+      <div id="processing-btn-div">
+        {/* <h3>Process</h3> */}
+        <button onClick={handleProcessing}>Start Processing</button>
+      </div>
+
     </main>
   );
 }
