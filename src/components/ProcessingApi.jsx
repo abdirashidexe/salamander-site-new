@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image"
 import loading from "./../../public/loading.gif"
 import placeholderImg from "./../../public/placeholder-box.png"
+
 
 
 export default function VideosApi() {
@@ -19,6 +20,8 @@ export default function VideosApi() {
   const [status, setStatus] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false)
 
+  //ability to handle canvas element
+  const binCanvasRef = useRef(null);
 
   //targeting the html element and running this function to keep track of changes of the threshold
   const handleChange = (event) => {
@@ -34,6 +37,20 @@ export default function VideosApi() {
   function handleThresholdClick() {
     console.log("Threshold:", threshold);
   }
+
+  //function to convert hex to rgb values
+  function hexToRgb(hex) {
+  const bigint = parseInt(hex.replace("#", ""), 16);
+  return {
+    r: (bigint >> 16) & 255,
+    g: (bigint >> 8) & 255,
+    b: bigint & 255,
+  };
+}
+
+function applyBinarization() {
+
+}
 
   async function handleProcessing() {
 
