@@ -49,6 +49,34 @@ export default function VideosApi() {
 }
 
 function applyBinarization() {
+    ctx.drawImage(img, 0, 0);   //drawing the thumbnail and setting coordinates of 0
+    
+    const { width, height } = ctx.canvas;   //getting the constants of width and height from the canvas
+
+    const imageData = ctx.getImageData(0, 0, width, height);  //applying the height, width and coordinates to the image data
+
+    const pixels = imageData.data;    //getting the pixel data from the image
+
+    const target = hexToRgb(color);  //converting the hex to rgb values to get the target color
+
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i];
+      const g = pixels[i + 1];
+      const b = pixels[i + 2];
+
+      const distance = Math.sqrt(   //Euclidean color distance between the pixel color and the target color
+        Math.pow(r - target.r, 2) +
+        Math.pow(g - target.g, 2) +
+        Math.pow(b - target.b, 2)
+      );
+        const value = distance <= threshold ? 255 : 0;  //comparing distance to threshold to determine black or white
+
+        //setting the pixel to black or white based on the value
+        pixels[index] = value; 
+        pixels[index + 1] = value; 
+        pixels[index + 2] = value;
+    }
+    ctx.putImageData(imageData, 0, 0);  //putting the modified image data back into the canvas  
 
 }
 
