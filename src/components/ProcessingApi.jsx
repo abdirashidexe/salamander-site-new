@@ -78,9 +78,9 @@ function applyBinarization(ctx, img) {
         const value = distance <= threshold ? 255 : 0; 
 
         //setting the pixel to black or white based on the value
-        pixels[index] = value; 
-        pixels[index + 1] = value; 
-        pixels[index + 2] = value;
+        pixels[i] = value; 
+        pixels[i + 1] = value; 
+        pixels[i + 2] = value;
     }
     //putting the modified image data back into the canvas
     ctx.putImageData(imageData, 0, 0);    
