@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image"
+import NextImage from "next/image"
 import loading from "./../../public/loading.gif"
 import placeholderImg from "./../../public/placeholder-box.png"
 
@@ -48,7 +48,7 @@ export default function VideosApi() {
   };
 }
 
-function applyBinarization() {
+function applyBinarization(ctx, img) {
     ctx.drawImage(img, 0, 0);   //drawing the thumbnail and setting coordinates of 0
     
     const { width, height } = ctx.canvas;   //getting the constants of width and height from the canvas
@@ -77,8 +77,28 @@ function applyBinarization() {
         pixels[index + 2] = value;
     }
     ctx.putImageData(imageData, 0, 0);  //putting the modified image data back into the canvas  
-
 }
+
+//useEffect to monitor changes in video, color, or threshold
+useEffect(() => {   
+  if (!video) return; 
+
+  //grabbing the canvas and content 
+  const canvas = binCanvasRef.current;
+  const ctx = canvas.getContext("2d");
+
+  //creating a new image object to load the as a binarized version
+  const img = new Image();
+  img.src = `http://localhost:3000/api/thumbnail/${video}`;
+
+  //runs the updated image when it's finished loading 
+  img.onload = () => {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    applyBinarization(ctx, img);
+  };
+}, [video, color, threshold]);
+
 
   async function handleProcessing() {
 
@@ -174,12 +194,12 @@ function applyBinarization() {
 
       <div id="binarizer-part-div">
         <div className="video-box">
-          <Image src={thumbnailUrl} alt={video ? `Image of ${video}` : `Thumbnail unavailable: No video was selected.`} width={400} height={200} unoptimized={true} />
+          <NextImage src={thumbnailUrl} alt={video ? `Image of ${video}` : `Thumbnail unavailable: No video was selected.`} width={300} height={400} unoptimized={true} />
           <p>Original</p>
         </div>
 
         <div className="video-box">
-          <Image src={placeholderImg} alt={`Image of Binarized Version`} width={400} height={200} unoptimized={true} />
+            <canvas ref={binCanvasRef} width={400} height={200} />
           <p>Binarized</p>
         </div>
       </div>

@@ -35,6 +35,13 @@ a {
   color: inherit;
 }
 
+canvas {
+  width: 290px;
+  height: 200px;
+  max-width: 400px;
+    border-radius: 15px;
+}
+
 /* --- Inputs & Buttons Global (All buttons except header buttons) --- */
 input,
 textarea,
