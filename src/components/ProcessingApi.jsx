@@ -96,6 +96,7 @@ useEffect(() => {
 
   //creating a new image object to load the as a binarized version
   const img = new Image();
+  img.crossOrigin = "anonymous";
   img.src = `http://localhost:3000/api/thumbnail/${video}`;
 
   //runs the updated image when it's finished loading 
@@ -206,7 +207,7 @@ useEffect(() => {
         </div>
 
         <div className="video-box">
-            <canvas ref={binCanvasRef} width={400} height={200} />
+            <canvas ref={binCanvasRef} />
           <p>Binarized</p>
         </div>
       </div>
