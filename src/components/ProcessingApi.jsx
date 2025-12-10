@@ -95,7 +95,7 @@ useEffect(() => {
   const ctx = canvas.getContext("2d");
 
   //creating a new image object to load the as a binarized version
-  const img = new Image();
+  const img = new  Image();
   img.crossOrigin = "anonymous";
   img.src = `http://localhost:3000/api/thumbnail/${video}`;
 
@@ -167,7 +167,7 @@ useEffect(() => {
       }
 
       {/* {<h2>Data: {status}</h2>} */}
-      {isLoading && (<Image
+      {isLoading && (<NextImage
         src={loading}
         width={100}
         height={75}
