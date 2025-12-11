@@ -202,7 +202,7 @@ useEffect(() => {
 
       <div id="binarizer-part-div">
         <div className="video-box">
-          <NextImage src={thumbnailUrl} alt={video ? `Image of ${video}` : `Thumbnail unavailable: No video was selected.`} width={300} height={400} unoptimized={true} />
+          <NextImage className="originalThumbnail" src={thumbnailUrl} alt={video ? `Image of ${video}` : `Thumbnail unavailable: No video was selected.`} width={300} height={400} unoptimized={true} />
           <p>Original</p>
         </div>
 

@@ -39,7 +39,7 @@ canvas {
   width: 290px;
   height: 200px;
   max-width: 400px;
-    border-radius: 15px;
+  border-radius: 15px;
 }
 
 /* --- Inputs & Buttons Global (All buttons except header buttons) --- */
@@ -47,6 +47,12 @@ input,
 textarea,
 button {
   font-family: 'Poppins', sans-serif;
+}
+
+.originalThumbnail {
+  border-radius: 12px;
+  height: 200px;
+  width: 300px;
 }
 
 button {
